@@ -1,31 +1,63 @@
 const movieModel = require('../models/movieModel.js');
-const apiHelpers = require('../helpers/apiHelpers.js');
+const {getGenres, searchMovies} = require('../helpers/apiHelpers.js');
+const express = require ('express')
+
 
 //Return requests to the client
 module.exports = {
-  getSearch: (req, res) => {
-    // get the search genre     
-
-    // https://www.themoviedb.org/account/signup
-    // get your API KEY
-
-    // use this endpoint to search for movies by genres, you will need an API key
-
-    // https://api.themoviedb.org/3/discover/movie
-
-    // and sort them by horrible votes using the search parameters in the API
+  getSearch: (req, res) => {   
+    let genre = req.body.genre
+    searchMovies(genre)
+    .then( (data) => {
+      res.status(200)
+      res.send(data.data)
+    })
+    .catch((err) => {
+      res.status(400)
+      res.send(err)
+    })
   },
+
   getGenres: (req, res) => {
-    // make an axios request to get the list of official genres
-    
-    // use this endpoint, which will also require your API key: https://api.themoviedb.org/3/genre/movie/list
-    
-    // send back
-  },
-  saveMovie: (req, res) => {
+    getGenres()
+    .then((data) =>{
+      // console.log('logging data in movie controller', data.data)
+      res.status(200)
+      res.end(JSON.stringify(data.data))
 
+    })
+    .catch((err) => {
+      res.status(400)
+      console.log('getGenres controller err', err)
+      res.end(err)
+    })
   },
-  deleteMovie: (req, res) => {
 
+  saveMovie: (request, response) => {
+    let movie = request.body
+    movieModel.SQLSaveToFavs(movie, (error, result) => {
+      if (error) {
+        console.log('failed to save to db')
+        response.status(500)
+        response.send(error)
+      }
+      console.log('movie saved to db')
+      response.status(200)
+      response.send(result)
+    })
+  },
+
+  deleteMovie: (request, response) => {
+    let movieId = req.body
+    movieModel.SQLDeleteFromFavs(movieId, (error, result) => {
+      if (error) {
+        console.log('failed to delete from db')
+        response.status(500)
+        response.send(error)
+      }
+      console.log('movie deleted form db')
+      response.status(200)
+      response.send(result)
+    })
   }
 }

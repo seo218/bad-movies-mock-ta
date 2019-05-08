@@ -4,6 +4,7 @@ import $ from 'jquery';
 // import AnyComponent from './components/filename.jsx'
 import Search from './components/Search.jsx'
 import Movies from './components/Movies.jsx'
+import Axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,9 +13,21 @@ class App extends React.Component {
       movies: [{deway: "movies"}],
       favorites: [{deway: "favorites"}],
       showFaves: false,
+      genres: []
     };
     
     // you might have to do something important here!
+  }
+
+  componentDidMount(){
+    Axios.get('/genres')
+    .then( (genres) => {
+      this.setState({
+        genres: genres
+      })
+    }
+    )
+    
   }
 
   getMovies() {
