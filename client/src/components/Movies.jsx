@@ -27,7 +27,7 @@ class Movies extends React.Component {
                    <span>{movie.release_date}</span>
                  </div>
                  <div className="movie_rating">
-                   <span className="title">Rating\</span>
+                   <span className="title">Rating</span>
                    <span>{movie.vote_count}</span>
                  </div>
                </section>

@@ -23,6 +23,6 @@ module.exports = {
   },
 
   searchMovies: (genre) => {
-    return axios.get(`https://api.themoviedb.org/3/discover/movie?sort_by=vote_average.asc&api_key=${API_KEY}&vote_average.asc&with_genres=${genre}`)
+    return axios.get(`https://api.themoviedb.org/3/discover/movie?sort_by=vote_average.asc&api_key=${API_KEY}&vote_average.asc&with_genres=${genre}&release_date.lte=2018`)
   }
 }

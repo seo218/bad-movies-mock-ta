@@ -6,7 +6,7 @@ class Search extends React.Component {
     super(props)
     this.state = {
       genres: [],
-      currentGenre: ''
+      genre: null
     };
     this.getGenres = this.getGenres.bind(this)
     this.changeGenre = this.changeGenre.bind(this)
@@ -33,13 +33,13 @@ class Search extends React.Component {
   changeGenre(e) {
     // console.log('e.target in changeGenre =>', e.target)
     this.setState({
-      currentGenre: e.target.value
+      genre: e.target.value
     })
   }
 
   render() {
     return (
-      <div className="search">
+      <div className="search"> 
         <button onClick={() => {this.props.swapFavorites()}}>{this.props.showFaves ? "Show Results" : "Show Favorites"}</button>
         <br/><br/>
 
@@ -54,7 +54,7 @@ class Search extends React.Component {
         </select>
         <br/><br/>
 
-        <button>Search</button>
+        <button onClick={() => {this.props.getMovies(this.state.genre)}}>Search</button>
 
       </div>
     );

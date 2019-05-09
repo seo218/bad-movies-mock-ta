@@ -14,11 +14,9 @@ class App extends React.Component {
       movies: [{deway: "movies"}],
       favorites: [{deway: "favorites"}],
       showFaves: false,
-      genres: []
+      genres: [],
     };
-    
-    // you might have to do something important here!
-    this.getMovies = this.getMovies.bind(this)
+  this.getMovies = this.getMovies.bind(this)
   }
 
   componentDidMount(){
@@ -26,14 +24,12 @@ class App extends React.Component {
   }
 
   getMovies(genreId) {
-    // make an axios request to your server on the GET SEARCH endpoint
     axios.get('/search', {
       params: {
-        genre: 18
+        genre: genreId
       }
     })
     .then( (movies) => {
-      // console.log('expect movies arr in getMovies client func =>', movies.data.results)
       this.setState({
         movies: movies.data.results
       })
@@ -64,7 +60,11 @@ class App extends React.Component {
         <header className="navbar"><h1>Bad Movies</h1></header> 
         
         <div className="main">
-          <Search swapFavorites={this.swapFavorites} showFaves={this.state.showFaves}/>
+          <Search 
+          swapFavorites={this.swapFavorites} 
+          showFaves={this.state.showFaves} 
+          getMovies={this.getMovies}
+          />
           <Movies movies={this.state.showFaves ? this.state.favorites : this.state.movies} showFaves={this.state.showFaves}/>
         </div>
       </div>
