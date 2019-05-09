@@ -15,9 +15,12 @@ class Movies extends React.Component {
   render() {
     return (
       <ul className="movies">
-       {this.props.movies.map(movie => {
+       {this.props.movies.map((movie, index )=> {
          return([
-           <li className="movie_item" key='{movie.id}'>
+          <li className="movie_item" 
+              key='{index}'
+              onClick={(e)=>{this.props.saveMovie(this.props.movies[index])}}
+          >
              <img src= {`https://image.tmdb.org/t/p/w220_and_h330_face${movie.poster_path}`} />
              <div className="movie_description">
                <h2>{movie.title}</h2>

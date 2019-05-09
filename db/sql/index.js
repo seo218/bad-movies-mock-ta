@@ -7,3 +7,5 @@ connection.connect( err => {
   if (err) throw err;
   else console.log(`connected to ${mysqlConfig.database} database!`)
 })
+
+module.exports = connection

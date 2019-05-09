@@ -11,12 +11,14 @@ class App extends React.Component {
   constructor(props) {
   	super(props)
   	this.state = {
-      movies: [{deway: "movies"}],
+      movies: [],
       favorites: [{deway: "favorites"}],
       showFaves: false,
       genres: [],
     };
   this.getMovies = this.getMovies.bind(this)
+  this.saveMovie = this.saveMovie.bind(this)
+  this.updateFavorites = this.updateFavorites.bind(this)
   }
 
   componentDidMount(){
@@ -24,11 +26,7 @@ class App extends React.Component {
   }
 
   getMovies(genreId) {
-    axios.get('/search', {
-      params: {
-        genre: genreId
-      }
-    })
+    axios.get('/search', {params: {genre: genreId}})
     .then( (movies) => {
       this.setState({
         movies: movies.data.results
@@ -39,8 +37,14 @@ class App extends React.Component {
     })
   }
 
-  saveMovie() {
-    // same as above but do something diff
+  saveMovie(movie) {
+    // console.log('expect movie obj =>', movie )
+    axios.post('/save', {movie: movie})
+    .then( 
+      this.updateFavorites()
+    )
+    .catch((err) => console.log('err in saving moving on client side', err))
+
   }
 
   deleteMovie() {
@@ -48,10 +52,21 @@ class App extends React.Component {
   }
 
   swapFavorites() {
-  //dont touch
     this.setState({
       showFaves: !this.state.showFaves
     });
+  }
+
+  updateFavorites() {
+    axios.get('/favs')
+    .then((favs) => {
+      this.setState({
+        favorites: favs
+      })
+    })
+    .catch((err) => {
+      console.log('failed to get favorites from server', err)
+    })
   }
 
   render () {
@@ -65,7 +80,10 @@ class App extends React.Component {
           showFaves={this.state.showFaves} 
           getMovies={this.getMovies}
           />
-          <Movies movies={this.state.showFaves ? this.state.favorites : this.state.movies} showFaves={this.state.showFaves}/>
+          <Movies movies={this.state.showFaves ? this.state.favorites : this.state.movies} 
+                  showFaves={this.state.showFaves}
+                  saveMovie={this.saveMovie}
+          />
         </div>
       </div>
     );
