@@ -6,7 +6,8 @@ const express = require ('express')
 //Return requests to the client
 module.exports = {
   getSearch: (req, res) => {   
-    let genre = req.body.genre
+    // console.log('expect genre id num => ', req.query)
+    let genre = req.query.genre
     searchMovies(genre)
     .then( (data) => {
       res.status(200)
@@ -14,7 +15,8 @@ module.exports = {
     })
     .catch((err) => {
       res.status(400)
-      res.send(err)
+      console.log('error in get getSeach controller', err)
+      res.send()
     })
   },
 
@@ -23,13 +25,13 @@ module.exports = {
     .then((data) =>{
       // console.log('logging data in movie controller', data.data)
       res.status(200)
-      res.end(JSON.stringify(data.data))
+      res.send(data.data)
 
     })
     .catch((err) => {
       res.status(400)
       console.log('getGenres controller err', err)
-      res.end(err)
+      ress.send()
     })
   },
 

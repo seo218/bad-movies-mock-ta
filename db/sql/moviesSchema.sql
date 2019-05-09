@@ -1,10 +1,4 @@
--- SET UP SCHEMA HERE
-
-
-
--- genere : [{id: number, name: string},{},{}]
--- uniqueID: Imdb id
--- title: original_title
+x``
 -- overview: overview
 -- popularity: popularity
 -- pic: poster_path (relavive path)

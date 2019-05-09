@@ -31,7 +31,7 @@ class Search extends React.Component {
   }
 
   changeGenre(e) {
-    console.log('e.target in changeGenre =>', e.target)
+    // console.log('e.target in changeGenre =>', e.target)
     this.setState({
       currentGenre: e.target.value
     })
