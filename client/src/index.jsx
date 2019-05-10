@@ -20,6 +20,7 @@ class App extends React.Component {
   this.saveMovie = this.saveMovie.bind(this)
   this.updateFavorites = this.updateFavorites.bind(this)
   this.swapFavorites = this.swapFavorites.bind(this)
+  this.deleteMovie = this.deleteMovie.bind(this)
   }
 
   componentDidMount(){
@@ -49,8 +50,12 @@ class App extends React.Component {
 
   }
 
-  deleteMovie() {
-    // same as above but do something diff
+  deleteMovie(movie) {
+    axios.post('/delete', {movie: movie} )
+    .then(
+      this.updateFavorites()
+    )
+    .catch( (err) => console.log('err in deleting from favs at client', err))
   }
 
   swapFavorites() {
@@ -66,9 +71,9 @@ class App extends React.Component {
         favorites: favs.data
       })
     })
-    .then(() => {
-      console.log('expect arr of movie Objs from favs update=>', this.state.favorites)
-    })
+    // .then(() => {
+    //   console.log('expect arr of movie Objs from favs update=>', this.state.favorites)
+    // })
     .catch((err) => {
       console.log('failed to get favorites from server', err)
     })
@@ -87,7 +92,8 @@ class App extends React.Component {
           />
           <Movies movies={this.state.showFaves ? this.state.favorites : this.state.movies} 
                   showFaves={this.state.showFaves}
-                  saveMovie={this.saveMovie}
+                  saveOrDeleteMovie={this.state.showFaves ? this.deleteMovie : this.saveMovie}
+                  deleteMovie={this.deleteMovie}
           />
         </div>
       </div>

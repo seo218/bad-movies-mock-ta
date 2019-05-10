@@ -15,10 +15,12 @@ module.exports = {
       cb(err, res)
     })
   },
-  SQLDeleteFromFavs: (movieId, cb) => {
+  SQLDeleteFromFavs: (movieObj, cb) => {
+    let movieId = movieObj.movie.id
+    console.log('expect movid obj in model =>', movieObj.movie.id)
     let queryStr = `DELETE FROM favs\
-                    WHERE movieId = ${movieId}`
-    sqlDb.query(queryStr, [movie], (err, res) => {
+                    WHERE id = ${movieId}`
+    sqlDb.query(queryStr, movieId, (err, res) => {
       cb(err, res)
     })
   },

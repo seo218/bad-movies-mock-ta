@@ -55,8 +55,9 @@ module.exports = {
   },
 
   deleteMovie: (request, response) => {
-    let movieId = req.body
-    SQLDeleteFromFavs(movieId, (error, result) => {
+    let movieObj = request.body
+    console.log('expect movieObj in controller =>', movieObj)
+    SQLDeleteFromFavs(movieObj, (error, result) => {
       if (error) {
         console.log('failed to delete from db')
         response.status(500)
@@ -72,7 +73,7 @@ module.exports = {
   getFavorites: (request, response) => {
     SQLGetFavorites( (error, result) => {
       if(error) {
-        console.log('failed to get favs from db')
+        console.log('failed to get favs from db', error)
         response.status(500)
         response.send()
       } else {

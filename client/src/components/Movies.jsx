@@ -15,16 +15,17 @@ class Movies extends React.Component {
   render() {
     return (
       <ul className="movies">
-      {console.log('expect arr of objs =>', this.props.movies)}
+      {/* {console.log('expect arr of objs =>', this.props.movies)} */}
        {this.props.movies.map((movie, index )=> {
          return([
           <li className="movie_item" 
               key='{index}'
-              onClick={(e)=>{this.props.saveMovie(this.props.movies[index])}}
+              onClick={(e)=>{this.props.saveOrDeleteMovie(this.props.movies[index])}}
+              
           >
-             <img src= {`https://image.tmdb.org/t/p/w220_and_h330_face${movie.poster_path}`} />
+             <img src= {`https://image.tmdb.org/t/p/w185_and_h278_bestv2${movie.poster_path}`} />
              <div className="movie_description">
-               <h2>{movie.title}</h2>
+               <h5>{movie.title}</h5>
                <section className="movie_details">
                  <div className="movie_year">
                    <span className="title">Release Date</span>
