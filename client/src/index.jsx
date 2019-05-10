@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+// import $ from 'jquery';
 // import AnyComponent from './components/filename.jsx'
 import Search from './components/Search.jsx'
 import Movies from './components/Movies.jsx'
 import axios from 'axios';
-import { get } from 'mongoose';
+// import { get } from 'mongoose';
 
 class App extends React.Component {
   constructor(props) {
@@ -50,8 +50,8 @@ class App extends React.Component {
 
   }
 
-  deleteMovie(movie) {
-    axios.post('/delete', {movie: movie} )
+  deleteMovie(movieObj) {
+    axios.post('/delete', {movie: movieObj} )
     .then(
       this.updateFavorites()
     )
