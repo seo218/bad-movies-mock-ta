@@ -8,8 +8,8 @@ module.exports = {
   SQLSaveToFavs: (movie, cb) => {
     // console.log('expect arr =>', movie)
     let queryStr = `INSERT INTO favs \
-                    (movieId, title, overview, popularity, picture, genre) \
-                    VALUE (?, ?, ?, ?, ?, ?)`
+                    (id, title, overview, vote_average, poster_path, genreIds, release_date) \
+                    VALUE (?, ?, ?, ?, ?, ?, ?)`
     // console.log('expect function => ', sqlDb.query)
   sqlDb.query(queryStr, movie, (err, res) => {
       cb(err, res)

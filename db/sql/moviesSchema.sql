@@ -1,10 +1,6 @@
-x``
--- overview: overview
--- popularity: popularity
--- pic: poster_path (relavive path)
+DROP DATABASE IF EXISTS badmovies;
 
-
-CREATE DATABASE IF NOT EXISTS badMovies;
+CREATE DATABASE badMovies;
 
 USE badMovies;
 
@@ -13,12 +9,12 @@ DROP TABLE IF EXISTS favs;
 CREATE TABLE favs
 (
   id INT NOT NULL AUTO_INCREMENT,
-  movieId INT NOT NULL,
   title VARCHAR (150) NOT NULL,
   overview VARCHAR(1000),
-  popularity INT NOT NULL,
-  picture VARCHAR (500),
-  genre INT  NOT NULL,
+  vote_average INT NOT NULL,
+  poster_path VARCHAR (500),
+  genreIds INT  NOT NULL,
+  release_date VARCHAR(50),
   PRIMARY KEY (id)
 );
 

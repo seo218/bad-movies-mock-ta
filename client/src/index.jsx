@@ -61,8 +61,11 @@ class App extends React.Component {
     axios.get('/favs')
     .then((favs) => {
       this.setState({
-        favorites: favs
+        favorites: favs.data
       })
+    })
+    .then(() => {
+      console.log('expect arr of movie Objs =>', this.state.favorites)
     })
     .catch((err) => {
       console.log('failed to get favorites from server', err)
