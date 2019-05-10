@@ -19,10 +19,12 @@ class App extends React.Component {
   this.getMovies = this.getMovies.bind(this)
   this.saveMovie = this.saveMovie.bind(this)
   this.updateFavorites = this.updateFavorites.bind(this)
+  this.swapFavorites = this.swapFavorites.bind(this)
   }
 
   componentDidMount(){
     this.getMovies(18)
+    this.updateFavorites()
   }
 
   getMovies(genreId) {
@@ -65,7 +67,7 @@ class App extends React.Component {
       })
     })
     .then(() => {
-      console.log('expect arr of movie Objs =>', this.state.favorites)
+      console.log('expect arr of movie Objs from favs update=>', this.state.favorites)
     })
     .catch((err) => {
       console.log('failed to get favorites from server', err)

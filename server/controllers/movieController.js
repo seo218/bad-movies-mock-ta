@@ -37,7 +37,7 @@ module.exports = {
 
   saveMovie: (request, response) => {
     let movie = request.body.movie
-    console.log('!!!!!!!!!!!!expect MOVIE =>', request.body.movie)
+    // console.log('!!!!!!!!!!!!expect MOVIE =>', request.body.movie)
     movie = [movie.id, movie.title, movie.overview, movie.vote_average, movie.poster_path, movie.genre_ids[0], movie.release_date]
     // console.log('expect query formatted arr =>', movie)
     // let movie = [1,'asdf','asdf',1,'asdf',18]
@@ -76,7 +76,7 @@ module.exports = {
         response.status(500)
         response.send()
       } else {
-        console.log('expecte movies obj =>', result)
+        // console.log('expecte movies obj =>', result)
         console.log('favories retrieved from db')
         response.status(200)
         response.send(result)

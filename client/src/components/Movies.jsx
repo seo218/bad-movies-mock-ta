@@ -15,6 +15,7 @@ class Movies extends React.Component {
   render() {
     return (
       <ul className="movies">
+      {console.log('expect arr of objs =>', this.props.movies)}
        {this.props.movies.map((movie, index )=> {
          return([
           <li className="movie_item" 
